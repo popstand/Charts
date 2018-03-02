@@ -150,7 +150,8 @@ open class PieChartRenderer: DataRenderer
                 {
                     let accountForSliceSpacing = sliceSpace > 0.0 && sliceAngle <= 180.0
                     
-                    context.setFillColor(dataSet.color(atIndex: j).cgColor)
+//                    context.setFillColor(dataSet.color(atIndex: j).cgColor)
+//                    context.setAlpha(0)
                     
                     let sliceSpaceAngleOuter = visibleAngleCount == 1 ?
                         0.0 :
@@ -242,9 +243,14 @@ open class PieChartRenderer: DataRenderer
                     
                     path.closeSubpath()
                     
+                    context.strokePath()
+                    context.setShadow(offset: CGSize.zero, blur: 6.0, color: dataSet.color(atIndex: j).cgColor)
+                    context.setStrokeColor(dataSet.color(atIndex: j).cgColor)
+                    context.setLineWidth(4)
+                    
                     context.beginPath()
                     context.addPath(path)
-                    context.fillPath(using: .evenOdd)
+                    
                 }
             }
             
@@ -725,7 +731,7 @@ open class PieChartRenderer: DataRenderer
             let accountForSliceSpacing = sliceSpace > 0.0 && sliceAngle <= 180.0
             
             context.setFillColor(set.highlightColor?.cgColor ?? set.color(atIndex: index).cgColor)
-
+//            context.setAlpha(0)
             let sliceSpaceAngleOuter = visibleAngleCount == 1 ?
                 0.0 :
                 sliceSpace / radius.DEG2RAD
@@ -823,6 +829,11 @@ open class PieChartRenderer: DataRenderer
             }
             
             path.closeSubpath()
+            
+            context.strokePath()
+            context.setShadow(offset: CGSize.zero, blur: 6.0, color: set.color(atIndex: index).cgColor)
+            context.setStrokeColor(set.color(atIndex: index).cgColor)
+            context.setLineWidth(4)
             
             context.beginPath()
             context.addPath(path)
