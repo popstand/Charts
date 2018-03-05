@@ -243,9 +243,9 @@ open class PieChartRenderer: DataRenderer
                     
                     path.closeSubpath()
                     
-                    context.setShadow(offset: CGSize.zero, blur: 6.0, color: dataSet.color(atIndex: j).cgColor)
+                    context.setShadow(offset: CGSize.zero, blur: 10.0, color: dataSet.color(atIndex: j).cgColor)
                     context.setStrokeColor(dataSet.color(atIndex: j).cgColor)
-                    context.setLineWidth(1)
+                    context.setLineWidth(2)
                     
                     context.beginPath()
                     context.addPath(path)
