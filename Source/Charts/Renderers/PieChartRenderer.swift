@@ -150,8 +150,7 @@ open class PieChartRenderer: DataRenderer
                 {
                     let accountForSliceSpacing = sliceSpace > 0.0 && sliceAngle <= 180.0
                     
-//                    context.setFillColor(dataSet.color(atIndex: j).cgColor)
-//                    context.setAlpha(0)
+                    context.setFillColor(dataSet.color(atIndex: j).cgColor)
                     
                     let sliceSpaceAngleOuter = visibleAngleCount == 1 ?
                         0.0 :
@@ -247,9 +246,14 @@ open class PieChartRenderer: DataRenderer
                     context.setStrokeColor(dataSet.color(atIndex: j).cgColor)
                     context.setLineWidth(2)
                     
+                    path.closeSubpath()
+                    
                     context.beginPath()
                     context.addPath(path)
                     context.strokePath()
+                    context.beginPath()
+                    context.addPath(path)
+                    context.fillPath(using: .evenOdd)
                     
                 }
             }
@@ -730,8 +734,8 @@ open class PieChartRenderer: DataRenderer
             
             let accountForSliceSpacing = sliceSpace > 0.0 && sliceAngle <= 180.0
             
-//            context.setFillColor(set.highlightColor?.cgColor ?? set.color(atIndex: index).cgColor)
-//            context.setAlpha(0)
+            context.setFillColor(set.highlightColor?.cgColor ?? set.color(atIndex: index).cgColor)
+
             let sliceSpaceAngleOuter = visibleAngleCount == 1 ?
                 0.0 :
                 sliceSpace / radius.DEG2RAD
@@ -837,6 +841,10 @@ open class PieChartRenderer: DataRenderer
             context.beginPath()
             context.addPath(path)
             context.strokePath()
+            
+            context.beginPath()
+            context.addPath(path)
+            context.fillPath(using: .evenOdd)
         }
         
         context.restoreGState()
